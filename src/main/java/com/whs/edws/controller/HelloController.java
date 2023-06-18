@@ -1,6 +1,7 @@
 package com.whs.edws.controller;
 
 
+import com.whs.edws.config.AppConfig;
 import com.whs.edws.entity.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ public class HelloController {
     @Resource
     private User user;
 
+    @Resource
+    private AppConfig appConfig;
+
 
     @GetMapping("/hello")
     public String hello(){
@@ -24,6 +28,6 @@ public class HelloController {
 
     @GetMapping("/whs")
     public String whs(){
-        return "hello whs!";
+        return "hello whs!" + appConfig;
     }
 }

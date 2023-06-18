@@ -1,3 +1,8 @@
 spring:
   profiles:
-    active: prod
+    active: dev
+
+tencent:
+  appId: whs
+  name: "吴海森"
+  age: 18
