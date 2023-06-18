@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/con")
 public class HelloController {
 
-    
+
     @GetMapping("/hello")
     public String hello(){
        return  "Hello SpringBoot!";
+    }
+
+
+    @GetMapping("/whs")
+    public String whs(){
+        return "hello whs!";
     }
 }
