@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whs.edws.mapper.DistrictMapper">
+    <insert id="insertDistrict">
+        insert into district (name) values (#{name})
+    </insert>
+
+    <select id="selectById" resultType="district">
+        select id, name from district where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="district">
+        select id, name from district
+    </select>
+</mapper>
