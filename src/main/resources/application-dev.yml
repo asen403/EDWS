@@ -14,6 +14,24 @@ spring:
       # Springfox使用的路径匹配是基于AntPathMatcher的
       # 所以需要配置此参数
       matching-strategy: ant_path_matcher
+  mail:
+    username: wuhaisen403@163.com
+    password: BCBBEYGMUGBYZEQN
+    host: smtp.163.com
+    port: 465
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
 
 # mybatis相关配置
 mybatis:
