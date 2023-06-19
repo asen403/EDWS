@@ -2,3 +2,26 @@ server:
   port: 8080
   servlet:
     context-path: "/edws"
+# 数据库连接信息配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/edws?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+
+# mybatis相关配置
+mybatis:
+  # mapper文件所在位置
+  mapper-locations: classpath:mapper/*.xml
+  # 扫描实体类别名
+  type-aliases-package: com.whs.edws.entity
+  configuration:
+    # 下划线转驼峰命名
+    safe-result-handler-enabled: true
+
+# 日志配置
+logging:
+  level:
+    com.whs.edws.mapper: debug
+
