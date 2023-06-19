@@ -1,5 +1,7 @@
 package com.whs.edws.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/mail")
+@Api(tags = "邮件控制器")
 public class MailController {
 
     private final JavaMailSender javaMailSender;
@@ -22,6 +25,7 @@ public class MailController {
     private String from;
 
     @GetMapping("/send")
+    @ApiOperation("发送邮件")
     public void send(){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
