@@ -6,7 +6,7 @@ import com.whs.edws.entity.District;
 public interface DistrictService {
 
 
-    boolean insertDistrict(District district);
+    int insertDistrict(District district);
 
     District selectById(int id);
 

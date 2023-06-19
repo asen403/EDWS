@@ -19,8 +19,8 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public boolean insertDistrict(District district) {
-        return districtMapper.insertDistrict(district) > 0;
+    public int insertDistrict(District district) {
+        return districtMapper.insertDistrict(district);
     }
 
     @Override
