@@ -9,6 +9,11 @@ spring:
     url: jdbc:mysql://localhost:3306/edws?useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
+  mvc:
+    pathmatch:
+      # Springfox使用的路径匹配是基于AntPathMatcher的
+      # 所以需要配置此参数
+      matching-strategy: ant_path_matcher
 
 # mybatis相关配置
 mybatis:
