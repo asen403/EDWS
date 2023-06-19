@@ -68,7 +68,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> fail(T data){
-        return ApiResponse.success("success", data);
+        return ApiResponse.success("fail", data);
     }
 
     public static <T> ApiResponse<T> fail(){
