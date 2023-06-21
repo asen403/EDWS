@@ -32,6 +32,15 @@ spring:
           socketFactory:
             port: 465
             class: javax.net.ssl.SSLSocketFactory
+  redis:
+    host: 192.168.145.128
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
 
 # mybatis相关配置
 mybatis:

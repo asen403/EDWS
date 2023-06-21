@@ -23,8 +23,7 @@ class DistrictServiceTest {
     void insertDistrict() {
         District district = new District();
         district.setName("高新区");
-        boolean b = districtService.insertDistrict(district);
-        System.out.println(b);
+        districtService.insertDistrict(district);
     }
 
     @Test
