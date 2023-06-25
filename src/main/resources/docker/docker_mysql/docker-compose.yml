@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  mysql:
+    image: "daocloud.io/library/mysql:8.0.2"
+    container_name: "mysql_8.0.2"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 403126
+      TZ: Asia/Shanghai
+    volumes:
+      - /root/docker_mysql/data:/var/lib/mysql
+
+
