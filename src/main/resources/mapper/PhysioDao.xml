@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whs.edws.dao.PhysioDao">
+
+    <resultMap type="com.whs.edws.entity.Physio" id="PhysioMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="collects" column="collects" jdbcType="VARCHAR"/>
+        <result property="likes" column="likes" jdbcType="INTEGER"/>
+        <result property="nums" column="nums" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PhysioMap">
+        select id,
+               name,
+               avatar,
+               collects,
+               likes,
+               nums,
+               create_time,
+               update_time
+        from physio
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PhysioMap">
+        select
+        id, name, avatar, collects, likes, nums, create_time, update_time
+        from physio
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="collects != null and collects != ''">
+                and collects = #{collects}
+            </if>
+            <if test="likes != null">
+                and likes = #{likes}
+            </if>
+            <if test="nums != null">
+                and nums = #{nums}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from physio
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="collects != null and collects != ''">
+                and collects = #{collects}
+            </if>
+            <if test="likes != null">
+                and likes = #{likes}
+            </if>
+            <if test="nums != null">
+                and nums = #{nums}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into physio(name, avatar, collects, likes, nums, create_time, update_time)
+        values (#{name}, #{avatar}, #{collects}, #{likes}, #{nums}, #{createTime}, #{updateTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into physio(name, avatar, collects, likes, nums, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.avatar}, #{entity.collects}, #{entity.likes}, #{entity.nums},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into physio(name, avatar, collects, likes, nums, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.avatar}, #{entity.collects}, #{entity.likes}, #{entity.nums},
+            #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        avatar = values(avatar),
+        collects = values(collects),
+        likes = values(likes),
+        nums = values(nums),
+        create_time = values(create_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update physio
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="collects != null and collects != ''">
+                collects = #{collects},
+            </if>
+            <if test="likes != null">
+                likes = #{likes},
+            </if>
+            <if test="nums != null">
+                nums = #{nums},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from physio
+        where id = #{id}
+    </delete>
+
+</mapper>
+

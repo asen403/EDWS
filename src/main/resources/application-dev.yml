@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/edws?useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://123.60.210.106:3306/nqdj?useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: 403126
   mvc:
     pathmatch:
       # Springfox使用的路径匹配是基于AntPathMatcher的
@@ -33,7 +33,7 @@ spring:
             port: 465
             class: javax.net.ssl.SSLSocketFactory
   redis:
-    host: 192.168.145.128
+    host: 123.60.210.106
     port: 6379
     lettuce:
       pool:
@@ -41,6 +41,7 @@ spring:
         max-wait: -1
         max-idle: 5
         min-idle: 0
+    password: 403126
 
 # mybatis相关配置
 mybatis:
