@@ -119,17 +119,16 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into user(username, password, avatar, phone, email, age, sex, address, create_time, update_time)
-        values (#{username}, #{password}, #{avatar}, #{phone}, #{email}, #{age}, #{sex}, #{address}, #{createTime},
-                #{updateTime})
+        insert into user(username, password, avatar, phone, email, age, sex, address)
+        values (#{username}, #{password}, #{avatar}, #{phone}, #{email}, #{age}, #{sex}, #{address})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into user(username, password, avatar, phone, email, age, sex, address, create_time, update_time)
+        insert into user(username, password, avatar, phone, email, age, sex, address)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.username}, #{entity.password}, #{entity.avatar}, #{entity.phone}, #{entity.email}, #{entity.age},
-            #{entity.sex}, #{entity.address}, #{entity.createTime}, #{entity.updateTime})
+            #{entity.sex}, #{entity.address})
         </foreach>
     </insert>
 
@@ -181,12 +180,6 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
         </set>
         where id = #{id}
     </update>
@@ -197,6 +190,10 @@
         from user
         where id = #{id}
     </delete>
+
+    <select id="queryByName" resultMap="UserMap">
+        select * from user where username = #{name}
+    </select>
 
 </mapper>
 

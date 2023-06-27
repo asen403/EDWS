@@ -1,7 +1,7 @@
 package com.whs.edws.entity;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (User)实体类

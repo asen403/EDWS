@@ -1,6 +1,7 @@
 package com.whs.edws.dao;
 
 import com.whs.edws.entity.Project;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author edws
  * @since 2023-06-27 20:11:51
  */
+@Mapper
 public interface ProjectDao {
 
     /**
