@@ -82,5 +82,11 @@ public interface ProjectDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 通过名字查询所有名字
+     *
+     * @param search 搜索
+     */
+    List<Project> queryAllByName(String search);
 }
 

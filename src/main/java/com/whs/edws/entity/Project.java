@@ -1,5 +1,7 @@
 package com.whs.edws.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -38,6 +40,7 @@ public class Project implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
     /**
      * 更新时间

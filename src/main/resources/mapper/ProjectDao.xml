@@ -161,5 +161,9 @@
         where id = #{id}
     </delete>
 
+    <select id="queryAllByName" resultMap="ProjectMap">
+        select * from project where title like concat('%', #{search} ,'%')
+    </select>
+
 </mapper>
 

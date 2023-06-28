@@ -1,0 +1,15 @@
+version: "3"
+services:
+  minio:
+    image: "minio/minio"
+    container_name: minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ACCESS_KEY: edws
+      MINIO_SECRET_KEY: 12345678
+    volumes:
+      - ./data:/mnt/data
+    command: server --console-address ':9001' /data
