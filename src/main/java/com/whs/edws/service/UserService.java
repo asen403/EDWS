@@ -11,7 +11,7 @@ public interface UserService {
 
      boolean register(User user);
 
-     User login(UserLoginDto userLoginDto, HttpServletRequest request);
+     User login(UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response);
 
      void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException;
 

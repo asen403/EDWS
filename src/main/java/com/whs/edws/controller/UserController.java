@@ -29,8 +29,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<User> login(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request){
-        User user = userService.login(userLoginDto, request);
+    public ApiResponse<User> login(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response){
+        User user = userService.login(userLoginDto, request, response);
         if(user != null){
             return ApiResponse.success(user);
         }
