@@ -161,5 +161,9 @@
         where id = #{id}
     </delete>
 
+    <select id="queryAll" resultMap="PhysioMap">
+        select * from physio
+    </select>
+
 </mapper>
 

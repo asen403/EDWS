@@ -1,7 +1,10 @@
 package com.whs.edws.service;
 
 import com.github.pagehelper.PageInfo;
+import com.whs.edws.dto.ProjectDto;
 import com.whs.edws.entity.Project;
+
+import java.util.List;
 
 public interface ProjectService {
 
@@ -12,4 +15,6 @@ public interface ProjectService {
     Project queryById(int id);
 
     boolean update(Project project);
+
+    List<ProjectDto> selectIdAndName();
 }

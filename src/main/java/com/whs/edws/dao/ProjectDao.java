@@ -1,5 +1,6 @@
 package com.whs.edws.dao;
 
+import com.whs.edws.dto.ProjectDto;
 import com.whs.edws.entity.Project;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -88,5 +89,12 @@ public interface ProjectDao {
      * @param search 搜索
      */
     List<Project> queryAllByName(String search);
+
+    /**
+     * 选择id和名称
+     *
+     * @return {@link List}<{@link ProjectDto}>
+     */
+    List<ProjectDto> selectIdAndName();
 }
 

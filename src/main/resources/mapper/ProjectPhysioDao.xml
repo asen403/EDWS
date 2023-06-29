@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whs.edws.dao.ProjectPhysioDao">
+
+    <resultMap type="com.whs.edws.entity.ProjectPhysio" id="ProjectPhysioMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="physioId" column="physio_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ProjectPhysioMap">
+        select id,
+               project_id,
+               physio_id
+        from project_physio
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ProjectPhysioMap">
+        select
+        id, project_id, physio_id
+        from project_physio
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="physioId != null">
+                and physio_id = #{physioId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from project_physio
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="projectId != null">
+                and project_id = #{projectId}
+            </if>
+            <if test="physioId != null">
+                and physio_id = #{physioId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into project_physio(project_id, physio_id)
+        values (#{projectId}, #{physioId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_physio(project_id, physio_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectId}, #{entity.physioId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_physio(project_id, physio_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectId}, #{entity.physioId})
+        </foreach>
+        on duplicate key update
+        project_id = values(project_id),
+        physio_id = values(physio_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_physio
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId},
+            </if>
+            <if test="physioId != null">
+                physio_id = #{physioId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from project_physio
+        where id = #{id}
+    </delete>
+
+</mapper>
+

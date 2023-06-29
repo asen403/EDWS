@@ -3,9 +3,12 @@ package com.whs.edws.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.whs.edws.common.ApiResponse;
+import com.whs.edws.dto.ProjectDto;
 import com.whs.edws.entity.Project;
 import com.whs.edws.service.ProjectService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/project")
@@ -42,6 +45,11 @@ public class ProjectController {
             return ApiResponse.success("更新成功");
         }
         return ApiResponse.fail("更新失败");
+    }
+
+    @GetMapping("/selectIdAndName")
+    public ApiResponse<List<ProjectDto>> selectIdAndName(){
+        return ApiResponse.success(projectService.selectIdAndName());
     }
 
 }

@@ -38,3 +38,9 @@ create table physio
     create_time datetime default current_timestamp comment '创建时间',
     update_time datetime default current_timestamp on update current_timestamp comment '更新时间'
 ) comment '理疗师表';
+
+create table project_physio(
+    id int primary key auto_increment comment '主键',
+    project_id int not null comment '项目id',
+    physio_id int not null comment '理疗师id'
+)comment '项目理疗师关联表';
