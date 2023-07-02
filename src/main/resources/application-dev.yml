@@ -42,6 +42,12 @@ spring:
         max-idle: 5
         min-idle: 0
     password: 403126
+  rabbitmq:
+    host: 123.60.210.106
+    port: 5672
+    username: edws
+    password: 403126
+    virtual-host: /test
 
 # mybatis相关配置
 mybatis:
