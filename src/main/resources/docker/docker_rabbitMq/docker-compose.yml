@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  rabbitMq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitMq
+    restart: always
+    ports:
+      - "5672:5672" # api服务端口号
+      - "15672:15672" # 图形化界面端口号
+    environment:
+      - TZ=Asia/Shanghai
+      - RABBITMQ_DEFAULT_USER=edws
+      - RABBITMQ_DEFAULT_PASS=403126
+    volumes:
+      - ./data:/var/lib/rabbitmq
