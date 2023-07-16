@@ -1,5 +1,6 @@
 package com.whs.edws.rabbitmq;
 
+import com.whs.edws.config.RabbitMQConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,6 +42,13 @@ class HelloWorldConsumerTest {
         rabbitTemplate.convertAndSend("boot-topic-exchange", "user.error.login", "这是一条error消息");
         rabbitTemplate.convertAndSend("boot-topic-exchange", "user.info.login", "这是一条info消息");
         rabbitTemplate.convertAndSend("boot-topic-exchange", "user.debug.login", "这是一条debug消息");
+    }
+
+    @Test
+    void maxLengthTestPublish(){
+        for (int i = 0; i < 11; i++) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.DELAY_EXCHANGE_NAME, RabbitMQConfig.DELAY_QUEUE_ROUTING_KEY, String.valueOf(i));
+        }
     }
 }
 
