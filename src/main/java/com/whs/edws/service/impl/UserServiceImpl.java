@@ -4,19 +4,24 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.whs.edws.dao.UserDao;
+import com.whs.edws.dto.LoginUserDto;
 import com.whs.edws.dto.UserLoginDto;
 import com.whs.edws.entity.User;
 import com.whs.edws.service.UserService;
 import com.whs.edws.utils.RedisUtil;
 import com.whs.edws.utils.TokenUtil;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -25,12 +30,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
+    private final AuthenticationManager authenticationManager;
 
-
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, AuthenticationManager authenticationManager) {
         this.userDao = userDao;
+        this.authenticationManager = authenticationManager;
     }
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -45,8 +50,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response) {
-        // 根据用户名查询用户信息
+    public Map<String, String> login(UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userLoginDto.getUsername(), userLoginDto.getPassword());
+        Authentication authenticate;
+        try{
+            authenticate = authenticationManager.authenticate(authenticationToken);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+
+        if(Objects.isNull(authenticate)){
+            throw new RuntimeException("用户名或密码错误");
+        }
+        LoginUserDto loginUserDto = (LoginUserDto) authenticate.getPrincipal();
+
+        Integer userId = loginUserDto.getUser().getId();
+        String token = TokenUtil.createJWT(userId.toString());
+        RedisUtil.set("login:"+userId, loginUserDto);
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        return map;
+        /*// 根据用户名查询用户信息
         User user = userDao.queryByName(userLoginDto.getUsername());
         String clientIP = ServletUtil.getClientIP(request);
         if(!Objects.isNull(user)){
@@ -63,7 +88,7 @@ public class UserServiceImpl implements UserService {
                 return user;
             }
         }
-        return null;
+        return null;*/
     }
 
     @Override

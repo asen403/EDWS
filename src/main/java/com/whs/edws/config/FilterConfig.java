@@ -18,7 +18,7 @@ public class FilterConfig {
      *
      * @return {@link FilterRegistrationBean}<{@link TokenFilter}>
      */
-    @Bean
+    /*@Bean
     public FilterRegistrationBean<TokenFilter> registerTokenFiler(){
         // 注册filter
         FilterRegistrationBean<TokenFilter> bean = new FilterRegistrationBean<>();
@@ -29,7 +29,7 @@ public class FilterConfig {
         // 设置哪些路径执行此过滤器
         bean.addUrlPatterns("/project/*");
         return bean;
-    }
+    }*/
 
 
     /**

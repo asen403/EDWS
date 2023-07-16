@@ -84,5 +84,13 @@ public interface UserDao {
 
     User queryByName(String name);
 
+    /**
+     * 查询用户菜单
+     *
+     * @param userId 用户id
+     * @return {@link List}<{@link String}>
+     */
+    List<String> queryUserMenu(int userId);
+
 }
 

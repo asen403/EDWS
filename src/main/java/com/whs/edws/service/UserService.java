@@ -6,12 +6,13 @@ import com.whs.edws.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public interface UserService {
 
      boolean register(User user);
 
-     User login(UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response);
+     Map<String, String> login(UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response);
 
      void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException;
 

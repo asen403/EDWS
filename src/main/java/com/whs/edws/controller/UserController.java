@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -29,12 +30,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<User> login(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response){
-        User user = userService.login(userLoginDto, request, response);
-        if(user != null){
-            return ApiResponse.success(user);
-        }
-        return ApiResponse.fail();
+    public ApiResponse<Map<String, String>> login(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request, HttpServletResponse response){
+        return ApiResponse.success(userService.login(userLoginDto, request, response));
     }
 
     @GetMapping("/captcha")

@@ -6,9 +6,12 @@ import com.whs.edws.common.ApiResponse;
 import com.whs.edws.dto.ProjectDto;
 import com.whs.edws.entity.Project;
 import com.whs.edws.service.ProjectService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/project")
@@ -47,7 +50,16 @@ public class ProjectController {
         return ApiResponse.fail("更新失败");
     }
 
+    public static void main(String[] args) {
+        print(null);
+    }
+
+    private static void print(Integer i){
+        System.out.println(i);
+    }
+
     @GetMapping("/selectIdAndName")
+    @PreAuthorize("hasAuthority('project:selectIdAndName')")
     public ApiResponse<List<ProjectDto>> selectIdAndName(){
         return ApiResponse.success(projectService.selectIdAndName());
     }

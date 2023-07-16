@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,10 @@ class EdwsApplicationTests {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+
+
+    @Resource
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     void contextLoads() {
@@ -36,6 +41,11 @@ class EdwsApplicationTests {
         district.setId(1);
         district.setName("西湖区");
         valueOperations.set("district", district);
+    }
+
+    @Test
+    void testBCryptPasswordEncoder(){
+        System.out.println(bCryptPasswordEncoder.encode("1234"));
     }
 
 }
