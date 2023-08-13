@@ -1,10 +1,8 @@
 package com.whs.edws.config;
-
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.HashMap;
 
 @Configuration
@@ -37,13 +35,11 @@ public class RabbitMQConfig {
         map.put("x-dead-letter-exchange", DEAD_LETTER_EXCHANGE_NAME);
         // x-dead-letter-routing-key  这里声明当前队列的死信路由key
         map.put("x-dead-letter-routing-key", DEAD_LETTER_QUEUE_ROUTING_KEY);
-        // x-message-ttl  声明队列的TTL
-//        map.put("x-message-ttl", 60000);
         // 设置该队列最大消息数
         map.put("x-max-length", 10);
+        map.put("x-overflow", "reject-publish-dlx");
         return QueueBuilder.durable(DELAY_QUEUE_NAME).withArguments(map).build();
     }
-
 
     // 声明死信队列
     @Bean("deadLetterQueue")
@@ -64,9 +60,4 @@ public class RabbitMQConfig {
                                      @Qualifier("deadLetterQueue") Queue queue){
         return BindingBuilder.bind(queue).to(directExchange).with(DEAD_LETTER_QUEUE_ROUTING_KEY);
     }
-
-
-
-
-
 }
